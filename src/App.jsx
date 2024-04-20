@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
 import { login,logout } from './store/slices/authSlice'
 import { Header,Footer } from './components'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -30,8 +31,8 @@ function App() {
 
           <Header />
 
-          <main>
-            {/* <Outlet/> */}
+          <main className='min-h-[65vmin]'>
+            <Outlet/>
           </main>
 
           <Footer />
@@ -39,7 +40,7 @@ function App() {
         </div>
       </div>
     )
-    : <p>Loading...</p>
+    : <p className='text-center p-20'>Loading...</p>
 }
 
 export default App

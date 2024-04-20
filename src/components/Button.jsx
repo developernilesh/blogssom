@@ -3,8 +3,8 @@ import React from "react";
 const Button = ({
     children,
     type = 'button',
-    bgColor = 'bg-fuchsia-600',
-    hoverColor = 'hover:bg-fuchsia-700',
+    bgColor = 'bg-indigo-500',
+    hoverColor = 'hover:bg-indigo-600',
     textColor = 'text-white',
     className = '',
     ...props
@@ -12,8 +12,8 @@ const Button = ({
     
   return (
     <button 
-    className={`px-3 py-1 rounded-xl $(bgColor) 
-    $(hoverColor) $(textColor) $(className)`}
+    className={`px-3 py-2 rounded-xl transition-all ease-in-out duration-200
+    ${bgColor} ${hoverColor} ${textColor} ${className} `}
     {...props}
     >
       {children}

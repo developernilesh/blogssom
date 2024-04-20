@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 import { Input, logoImg, Button } from ".";
 
 const Signup = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const {register,handleSubmit} = useForm();
+  const {register, handleSubmit} = useForm()
   const [error, setError] = useState('')
 
   const signUp = async(data) => {
@@ -41,7 +41,7 @@ const Signup = () => {
                 Already have an account?&nbsp;
                 <Link
                 to="/login"
-                className="font-medium text-primary transition-all duration-200 hover:underline"
+                className="font-medium text-indigo-600 transition-all duration-200 hover:underline"
                 >
                     Sign In
                 </Link>
@@ -86,7 +86,7 @@ const Signup = () => {
                     <Button
                     type="submit"
                     className="w-full"
-                    >Sign in</Button>
+                    >Sign up</Button>
                 </div>
             </form>
         </div>

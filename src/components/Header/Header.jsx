@@ -2,12 +2,11 @@ import React from "react";
 import {Container, logoImg, LogoutBtn} from "../index"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { logout } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status)
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const navItems = [
     {
@@ -21,19 +20,19 @@ const Header = () => {
       active: !authStatus,
     },
     {
-        name: "Signup",
-        slug: "/signup",
-        active: !authStatus,
+      name: "Signup",
+      slug: "/signup",
+      active: !authStatus,
     },
     {
-        name: "All Posts",
-        slug: "/all-posts",
-        active: authStatus,
+      name: "All Posts",
+      slug: "/all-posts",
+      active: authStatus,
     },
     {
-        name: "Add Post",
-        slug: "/add-post",
-        active: authStatus,
+      name: "Add Post",
+      slug: "/add-post",
+      active: authStatus,
     },
   ]
 
