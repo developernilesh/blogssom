@@ -1,4 +1,3 @@
-import { stringify } from "postcss";
 import config from "../config/config.js";
 import { Client,Account,ID } from "appwrite";
 
@@ -31,7 +30,8 @@ export class AuthService {
 
     async login({email, password}) {
         try {
-            return await this.account.createEmailSession(email, password);
+            console.log(this.account);
+            return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
             console.error("Appwrite serive :: login :: error", error);
         }

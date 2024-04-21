@@ -1,6 +1,6 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import logoImg from "../assets/BlogSsom-logo.png"
+import logoImg from "../assets/BlogSsomLogo.png"
 import Container from "./container/Container"
 import LogoutBtn from "./Header/LogoutBtn";
 import Button from "./Button";

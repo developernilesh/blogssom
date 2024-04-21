@@ -7,22 +7,22 @@ const Home = () => {
     const [posts,setPosts] = useState([])
 
     useEffect(() => {
-        databaseService.getAllPosts()
+        databaseService.getAllPosts([])
         .then((posts) => {
             if(posts){
                 setPosts(posts.documents)
             }
         })
     },[])
-
-
+    
+    
     if (posts.length === 0) {
         return (
-            <div className="w-full py-20 text-center">
+            <div className="w-full py-[20vmin] text-center">
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold text-slate-700">
+                            <h1 className="text-4xl font-bold text-fuchsia-800">
                                 Login to read posts
                             </h1>
                         </div>
@@ -35,9 +35,9 @@ const Home = () => {
     return (
         <div className='w-full py-8'>
             <Container>
-                <div className='flex flex-wrap'>
+                <div className='flex justify-around flex-wrap'>
                     {posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/4'>
+                        <div key={post.$id} className='p-2 w-[270px]'>
                             <PostCard {...post} />
                         </div>
                     ))}

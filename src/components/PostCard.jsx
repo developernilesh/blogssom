@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const PostCard = ({$id, title, featuredimage}) => {
   return (
     <Link to={`/post/${$id}`}>
-        <div className="w-full bg-white rounded-xl p-4">
+        <div className="w-full bg-white/40 rounded-xl p-4 shadow-[0_0px_6px_rgba(0,0,0,0.3)]">
             <div className="w-full justify-center mb-4">
                 <img
                 src={databaseService.seeFilePreview(featuredimage)}

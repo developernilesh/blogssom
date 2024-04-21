@@ -12,7 +12,7 @@ export class DatabaseService{
             .setProject(config.appwriteProjectId);
         
         this.databases = new Databases(this.client);
-        this.storage = new Storage(this.client);
+        this.bucket = new Storage(this.client);
     }
 
     async createPost({title,slug,content,featuredimage,status,userid}){
@@ -64,7 +64,8 @@ export class DatabaseService{
 
     async getPost(slug){
         try {
-            return await this.databases.deleteDocument(
+            console.log(slug)
+            return await this.databases.getDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug,
@@ -78,6 +79,7 @@ export class DatabaseService{
 
     async getAllPosts(queries = [Query.equal("status","active")]){
         try {
+            console.log(this.databases)
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,

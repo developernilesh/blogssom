@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import databaseService from "../../appwrite/conf";
+import {Input, RTE, Select, Button} from "../index";
 
 const PostForm = ({post}) => {
     const {register, handleSubmit, watch, control, setValue, getValues} = useForm({
@@ -31,7 +32,7 @@ const PostForm = ({post}) => {
             })
 
             if(dbPost) {
-                navigate('/post/${dbPost.$id')
+                navigate(`/post/${dbPost.$id}`)
             }
         }
         else{
@@ -44,11 +45,11 @@ const PostForm = ({post}) => {
 
             const dbPost = await databaseService.createPost({
                 ...data,
-                userId: userData.$id,
+                userid: userData.$id,
             })
 
             if(dbPost) {
-                navigate('/post/${dbPost.$id')
+                navigate(`/post/${dbPost.$id}`)
             }
         }
     }
@@ -107,7 +108,7 @@ const PostForm = ({post}) => {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={appwriteService.getFilePreview(post.featuredimage)}
                             alt={post.title}
                             className="rounded-lg"
                         />

@@ -38,8 +38,8 @@ const Header = () => {
 
 
   return (
-    <header className='py-3 shadow bg-gray-50'>
-      <Container>
+    <header className='py-3 bg-transparent sticky z-10 top-0'>
+      <Container className="py-1 bg-transparent backdrop-blur rounded-full">
         <nav className='flex items-center'>
           <div className='mr-4'>
             <Link to='/'>
@@ -52,13 +52,14 @@ const Header = () => {
               <li key={item.name}>
                 <button
                 onClick={() => navigate(item.slug)}
-                className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                className='inline-bock px-6 py-2 mr-2 duration-200 border-y-2 text-lg font-semibold
+                border-transparent hover:border-fuchsia-600 rounded-full'
                 >{item.name}</button>
               </li>
             ) : null
             )}
             {authStatus && (
-              <li>
+              <li className="flex items-center">
                 <LogoutBtn />
               </li>
             )}
