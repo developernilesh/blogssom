@@ -3,8 +3,8 @@ import React from "react";
 const Button = ({
     children,
     type = 'button',
-    bgColor = 'bg-indigo-500',
-    hoverColor = 'hover:bg-indigo-600',
+    bgColor = 'bg-purple-600',
+    hoverColor = 'hover:bg-purple-700',
     textColor = 'text-white',
     className = '',
     ...props

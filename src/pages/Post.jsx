@@ -11,8 +11,8 @@ const Post = () => {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
-
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    
+    const isAuthor = post && userData ? post.userid === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
@@ -31,15 +31,16 @@ const Post = () => {
             }
         });
     };
+    
 
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className="w-full flex justify-start mb-4 relative rounded-xl p-2">
                     <img
                         src={databaseService.seeFilePreview(post.featuredimage)}
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-sm w-[60vw] border border-black/20"
                     />
 
                     {isAuthor && (
@@ -60,7 +61,7 @@ const Post = () => {
                 </div>
                 <div className="browser-css">
                     {parse(post.content)}
-                    </div>
+                </div>
             </Container>
         </div>
     ) : null;

@@ -25,7 +25,7 @@ const Header = () => {
       active: !authStatus,
     },
     {
-      name: "All Posts",
+      name: "Your Posts",
       slug: "/all-posts",
       active: authStatus,
     },
@@ -38,7 +38,7 @@ const Header = () => {
 
 
   return (
-    <header className='py-3 bg-transparent sticky z-10 top-0'>
+    <header className='py-3 bg-transparent sticky z-10 top-0 text-slate-800'>
       <Container className="py-1 bg-transparent backdrop-blur rounded-full">
         <nav className='flex items-center'>
           <div className='mr-4'>
@@ -52,7 +52,7 @@ const Header = () => {
               <li key={item.name}>
                 <button
                 onClick={() => navigate(item.slug)}
-                className='inline-bock px-6 py-2 mr-2 duration-200 border-y-2 text-lg font-semibold
+                className='inline-bock px-4 py-2 mr-2 duration-200 border-y-2 text-lg font-semibold
                 border-transparent hover:border-fuchsia-600 rounded-full'
                 >{item.name}</button>
               </li>
@@ -65,7 +65,7 @@ const Header = () => {
             )}
           </ul>
         </nav>
-        </Container>
+      </Container>
     </header>
   );
 };

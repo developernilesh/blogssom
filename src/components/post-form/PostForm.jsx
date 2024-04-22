@@ -32,7 +32,7 @@ const PostForm = ({post}) => {
             })
 
             if(dbPost) {
-                navigate(`/post/${dbPost.$id}`)
+                navigate('/all-posts')
             }
         }
         else{
@@ -45,11 +45,11 @@ const PostForm = ({post}) => {
 
             const dbPost = await databaseService.createPost({
                 ...data,
-                userid: userData.$id,
+                userid: `${userData.$id}`,
             })
 
             if(dbPost) {
-                navigate(`/post/${dbPost.$id}`)
+                navigate('/all-posts')
             }
         }
     }
@@ -78,37 +78,37 @@ const PostForm = ({post}) => {
     },[watch,slugTransform])
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap text-lg font-semibold text-slate-800">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
                     placeholder="Title"
-                    className="mb-4"
+                    className="mb-4 shadow-[0_0px_10px_rgba(0,0,0,0.3)]"
                     {...register("title", { required: true })}
                 />
                 <Input
                     label="Slug :"
                     placeholder="Slug"
-                    className="mb-4"
+                    className="mb-4 shadow-[0_0px_10px_rgba(0,0,0,0.3)]"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")}/>
             </div>
             <div className="w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-4 shadow-[0_0px_10px_rgba(0,0,0,0.3)]"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
                 {post && (
-                    <div className="w-full mb-4">
+                    <div className="w-full mb-4 shadow-[0_0px_10px_rgba(0,0,0,0.3)]">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredimage)}
+                            src={databaseService.seeFilePreview(post.featuredimage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -117,10 +117,10 @@ const PostForm = ({post}) => {
                 <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 shadow-[0_0px_10px_rgba(0,0,0,0.3)]"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" bgColor={post && "bg-green-500"} hoverColor={post && "bg-green-600"} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>

@@ -79,7 +79,6 @@ export class DatabaseService{
 
     async getAllPosts(queries = [Query.equal("status","active")]){
         try {
-            console.log(this.databases)
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,

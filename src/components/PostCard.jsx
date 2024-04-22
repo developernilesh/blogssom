@@ -1,21 +1,32 @@
 import React from "react";
 import databaseService from "../appwrite/conf";
 import { Link } from "react-router-dom";
+import parse from "html-react-parser";
 
-const PostCard = ({$id, title, featuredimage}) => {
+const PostCard = ({$id, title, featuredimage, content}) => {
   return (
     <Link to={`/post/${$id}`}>
-        <div className="w-full bg-white/40 rounded-xl p-4 shadow-[0_0px_6px_rgba(0,0,0,0.3)]">
-            <div className="w-full justify-center mb-4">
+        <div className="w-full mb-2 bg-white/60 shadow-[0_0px_6px_rgba(0,0,0,0.3)]">
+            <div className="w-full h-[150px] justify-center">
                 <img
                 src={databaseService.seeFilePreview(featuredimage)}
                 alt={title}
-                className="rounded-xl"
+                className="w-full h-full"
                 />
             </div>
-            <h2
-            className="text-xl font-bold text-slate-800"
-            >{title}</h2>
+            <div className="px-4 py-2">
+              <h2
+              className="text-xl py-2 font-bold text-slate-800 truncate"
+              >{title}</h2>
+              <div className="py-2 flex items-center">
+                <div className="truncate">
+                  {parse(content)}
+                </div>
+                <p>...</p>
+              </div>
+              
+            </div>
+            
         </div>
     </Link>
   );

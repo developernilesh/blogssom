@@ -12,6 +12,7 @@ import PostForm from "./post-form/PostForm";
 import Login from "./Login";
 import Signup from "./Signup";
 import Protected from "./AuthLayout";
+import Loader from "./Loader/Loader"
 
 export {
     Header,
@@ -27,5 +28,6 @@ export {
     PostForm,
     Login,
     Signup,
-    Protected
+    Protected,
+    Loader,
 }

@@ -4,6 +4,7 @@ import authService from './appwrite/auth'
 import { login,logout } from './store/slices/authSlice'
 import { Header,Footer } from './components'
 import { Outlet } from 'react-router-dom'
+import Loader from './components/Loader/Loader'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    setLoading(true)
     authService.getCurrentUser()
     .then((userData) => {
       if(userData){
@@ -40,7 +42,10 @@ function App() {
         </div>
       </div>
     )
-    : <p className='text-center p-20'>Loading...</p>
+    : 
+    (<div className="app-bg">
+      <Loader/>
+    </div>)
 }
 
 export default App
