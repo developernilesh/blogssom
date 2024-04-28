@@ -33,7 +33,7 @@ function App() {
 
           <Header />
 
-          <main className='min-h-[65vmin]'>
+          <main className='min-h-[85vh]'>
             <Outlet/>
           </main>
 

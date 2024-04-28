@@ -1,12 +1,11 @@
 import React from "react";
 import {Container, logoImg, LogoutBtn} from "../index"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status)
-  const navigate = useNavigate()
+  const location = useLocation()
 
   const navItems = [
     {
@@ -26,7 +25,7 @@ const Header = () => {
     },
     {
       name: "Your Posts",
-      slug: "/all-posts",
+      slug: "/your-posts",
       active: authStatus,
     },
     {
@@ -38,7 +37,7 @@ const Header = () => {
 
 
   return (
-    <header className='py-3 bg-transparent sticky z-10 top-0 text-slate-800'>
+    <header className='py-3 bg-transparent sticky z-10 top-0 text-indigo-900'>
       <Container className="py-1 bg-transparent backdrop-blur rounded-full">
         <nav className='flex items-center'>
           <div className='mr-4'>
@@ -50,11 +49,14 @@ const Header = () => {
             {navItems.map((item) => 
             item.active ? (
               <li key={item.name}>
-                <button
-                onClick={() => navigate(item.slug)}
-                className='inline-bock px-4 py-2 mr-2 duration-200 border-y-2 text-lg font-semibold
-                border-transparent hover:border-fuchsia-600 rounded-full'
-                >{item.name}</button>
+                <Link
+                  to={item.slug}
+                  className={`inline-block px-4 py-2 mr-2 duration-200 font-semibold 
+                  rounded-full border-y-2 border-transparent hover:border-fuchsia-700
+                  ${location.pathname === item.slug ? "text-fuchsia-700 transform scale-105" : ""}`}
+                >
+                  {item.name}
+                </Link>
               </li>
             ) : null
             )}

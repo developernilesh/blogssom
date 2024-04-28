@@ -15,7 +15,6 @@ import AddPost from './pages/AddPost.jsx'
 import EditPost from './pages/EditPost.jsx'
 import Post from './pages/Post.jsx'
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -42,10 +41,9 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: '/all-posts',
+        path: '/your-posts',
         element: (
           <Protected authentication>
-            {' '}
             <AllPosts/>
           </Protected>
         )
@@ -54,7 +52,6 @@ const router = createBrowserRouter([
         path: '/add-post',
         element: (
           <Protected authentication>
-            {' '}
             <AddPost/>
           </Protected>
         )
@@ -63,14 +60,16 @@ const router = createBrowserRouter([
         path: "/edit-post/:slug",
         element: (
             <Protected authentication>
-                {" "}
                 <EditPost/>
             </Protected>
         )
       },
       {
         path: "/post/:slug",
-        element: <Post/>
+        element: (
+        <Protected authentication>
+          <Post/>
+        </Protected>)
       },
     ],
   },

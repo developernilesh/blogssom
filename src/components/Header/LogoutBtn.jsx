@@ -2,10 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth";
 import { logout } from "../../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const LogoutBtn = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   const logoutHandler = () => {
     authService.logout()
@@ -14,8 +16,8 @@ const LogoutBtn = () => {
 
   return( 
     <button
-    className="inline-block px-4 py-2 bg-fuchsia-700 text-lg
-    font-semibold hover:bg-fuchsia-800 rounded-xl text-white"
+    className="inline-block px-4 py-2 bg-sky-700
+    font-semibold hover:bg-sky-800 rounded-xl text-white"
     onClick={logoutHandler}
     >Logout</button>
   );

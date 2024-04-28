@@ -78,8 +78,8 @@ const PostForm = ({post}) => {
     },[watch,slugTransform])
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap text-lg font-semibold text-slate-800">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-col lg:flex-row font-semibold text-slate-900">
+            <div className="w-full sm:w-11/12 md:w-9/12 lg:w-2/3 px-2 mb-4">
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -97,7 +97,7 @@ const PostForm = ({post}) => {
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")}/>
             </div>
-            <div className="w-1/3 px-2">
+            <div className="w-full flex flex-col gap-6 sm:w-11/12 md:w-9/12 lg:w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
@@ -120,7 +120,7 @@ const PostForm = ({post}) => {
                     className="mb-4 shadow-[0_0px_10px_rgba(0,0,0,0.3)]"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post && "bg-green-500"} hoverColor={post && "bg-green-600"} className="w-full">
+                <Button type="submit" bgColor={post && "bg-teal-700"} hoverColor={post && "hover:bg-teal-800"} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>

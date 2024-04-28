@@ -16,13 +16,10 @@ const PostCard = ({$id, title, featuredimage, content}) => {
             </div>
             <div className="px-4 py-2">
               <h2
-              className="text-xl py-2 font-bold text-slate-800 truncate"
+              className="text-xl py-2 font-bold text-indigo-900 truncate"
               >{title}</h2>
-              <div className="py-2 flex items-center">
-                <div className="truncate">
-                  {parse(content)}
-                </div>
-                <p>...</p>
+              <div className="py-2 w-full truncate">
+                {parse(content)}
               </div>
               
             </div>
