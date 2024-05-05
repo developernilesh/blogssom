@@ -33,9 +33,12 @@ const Home = () => {
                 (null) :
                 (
                     <div className='w-full pb-8 '>
-                    <img src={homeBg} className="-mt-20 mb-10 w-screen"/>
+                        <div className="w-full h-0 sm:h-[200px] md:h-[250px] lg:h-auto lg:w-screen flex justify-center">
+                            <img src={homeBg} className="-mt-20 mb-10 h-full object-cover lg:w-full"/>
+                        </div>
+
                         <Container>
-                            <div className='flex justify-around flex-wrap'>
+                            <div className='flex justify-around flex-wrap pt-6 sm:pt-0'>
                                 {posts.map((post) => (
                                     <div key={post.$id} className='p-2 w-[270px]'>
                                         <PostCard {...post} />
