@@ -40,10 +40,11 @@ const Header = () => {
 
 
   return (
-    <header className={`py-3 bg-transparent fixed z-10 inset-0 text-indigo-900 ${!isHidden && "bg-white/50 backdrop-blur"}`}>
-      <Container className={`py-0 sm:py-1 bg-transparent rounded-xl md:rounded-full ${isHidden && "backdrop-blur"}`}>
-        <nav className='flex items-center justify-between'>
-          <div className={`${!isHidden && "hidden"} mr-4`}>
+    <header className={`py-1 bg-[#d6e9ec]/60 fixed md:sticky z-10 top-0 left-0 right-0 
+    ${!isHidden ? "inset-0" : "inset-auto"} text-indigo-900 ${!isHidden && "app-bg"} backdrop-blur`}>
+      <Container className={`py-0 sm:py-1 rounded-xl md:rounded-full}`}>
+        <nav className='flex items-center justify-between bg-transparent'>
+          <div className={`${!isHidden && "hidden"} md:block mr-4`}>
             <Link to='/'>
               <img src={logoImg} width="100px"/>
             </Link>
@@ -70,18 +71,20 @@ const Header = () => {
             )}
           </ul>
 
-          <button className={`${!isHidden && "hidden"} md:hidden text-lg transition-all duration-200 ease-linear`} onClick={() => setIsHidden(isHidden => !isHidden)}>
+          <button 
+          className={`${!isHidden && "hidden"} md:hidden text-lg `} 
+          onClick={() => setIsHidden(isHidden => !isHidden)}>
             <TiThMenu/>
           </button>
 
-          <div className={`${isHidden && "hidden"} bg-transparent w-full flex flex-col items-center`}>
+          <div className={`${isHidden && "hidden"} md:hidden bg-transparent w-full flex flex-col items-center`}>
             <div className="w-full flex justify-between items-center">
               <div className='mr-4'>
                 <Link to='/'>
                   <img src={logoImg} width="100px"/>
                 </Link>
               </div>
-              <button className="text-xl py-2 transition-all duration-200 ease-linear" onClick={() => setIsHidden(isHidden => !isHidden)}>
+              <button className="text-xl py-2" onClick={() => setIsHidden(isHidden => !isHidden)}>
                 <IoClose/>
               </button>
             </div>
@@ -93,8 +96,7 @@ const Header = () => {
                   <li key={item.name} onClick={() => setIsHidden(true)}>
                     <Link
                       to={item.slug}
-                      className={`inline-block px-4 py-2 mr-2 duration-200 font-semibold 
-                      rounded-full border-y-2 border-transparent hover:border-fuchsia-700
+                      className={`inline-block px-4 py-2 mr-2 duration-200 font-semibold  
                       ${location.pathname === item.slug ? "text-fuchsia-700 transform scale-105" : ""}`}
                     >
                       {item.name}

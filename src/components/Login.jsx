@@ -4,16 +4,18 @@ import { login as authLogin } from "../store/slices/authSlice";
 import authService from "../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Input, logoImg, Button, Container } from ".";
+import { Input, logoImg, Button, Container, Loader } from ".";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {register,handleSubmit} = useForm();
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState('')
 
   const login = async(data) => {
     setError("")
+    setLoading(true)
     try {
         const session = await authService.login(data)
         if(session){
@@ -25,9 +27,11 @@ const Login = () => {
     catch (error) {
         setError(error.message)
     }
+    setLoading(false)
   }
   
   return (
+    !loading ? (
     <div className="flex items-center justify-center w-full">
         <Container>
             <div className={`mx-auto w-full max-w-lg bg-white/50 backdrop-blur 
@@ -87,6 +91,10 @@ const Login = () => {
             </div>
         </Container>
     </div>
+    ) :
+    (
+    <Loader/>
+    )
   );
 };
 

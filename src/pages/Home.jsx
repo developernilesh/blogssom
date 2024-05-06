@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import databaseService from "../appwrite/conf";
 import { Button, Container, Loader, PostCard } from "../components";
 import { useSelector } from "react-redux";
-import homeBg from '../assets/homebackground.png'
 import defaultBg from '../assets/defaultbg.png'
 import { Link } from "react-router-dom";
 
@@ -33,12 +32,9 @@ const Home = () => {
                 (null) :
                 (
                     <div className='w-full pb-8 '>
-                        <div className="w-full h-0 sm:h-[200px] md:h-[250px] lg:h-auto lg:w-screen flex justify-center">
-                            <img src={homeBg} className="-mt-20 mb-10 h-full object-cover lg:w-full"/>
-                        </div>
 
                         <Container>
-                            <div className='flex justify-around flex-wrap pt-6 sm:pt-0'>
+                            <div className='flex justify-around flex-wrap pt-6'>
                                 {posts.map((post) => (
                                     <div key={post.$id} className='p-2 w-[270px]'>
                                         <PostCard {...post} />
