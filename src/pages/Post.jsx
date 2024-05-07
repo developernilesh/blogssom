@@ -12,10 +12,6 @@ const Post = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
 
-    // const userData = useSelector((state) => state.auth.userData);
-    
-    // const isAuthor = post && userData ? post.userid === userData.$id : false;
-
     useEffect(() => {
         if (slug) {
             databaseService.getPost(slug).then((post) => {
@@ -27,7 +23,6 @@ const Post = () => {
 
     const fetchAuthorInfo = async() => {
         const userData = await authService.getCurrentUser()
-        console.log(userData);
 
         if(post && userData){
             post.userid === userData.$id ? setIsAuthor(true) : setIsAuthor(false)
@@ -48,13 +43,13 @@ const Post = () => {
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full md:max-w-[750px] flex gap-3 justify-between items-end mb-4 relative rounded-xl">
-                    <div className="ml-1">
-                        <h1 className="text-xl text-indigo-900 font-bold">{post.title}</h1>
+                <div className="w-full flex flex-col-reverse md:flex-row gap-3 justify-between items-end mb-4 relative rounded-xl">
+                    <div className="w-full flex justify-start">
+                        <h1 className="sm:text-lg md:text-xl text-indigo-900 font-bold text-left">{post.title}</h1>
                     </div>
 
                     {isAuthor && (
-                        <div className="flex flex-col sm:flex-row items-end gap-4">
+                        <div className="flex items-end gap-4">
                             <Link to={`/edit-post/${post.$id}`}>
                                 <Button bgColor="bg-green-700" hoverColor="hover:bg-green-800">
                                     Edit
@@ -66,12 +61,16 @@ const Post = () => {
                         </div>
                     )}
                 </div>
-                <img
-                    src={databaseService.seeFilePreview(post.featuredimage)}
-                    alt={post.title}
-                    className="rounded-sm w-full md:w-[750px] mb-4 border border-black/20"
-                />
-                <div className="text-lg ml-1">
+
+                <div className="w-full flex justify-center">
+                    <img
+                        src={databaseService.seeFilePreview(post.featuredimage)}
+                        alt={post.title}
+                        className="rounded-sm w-full max-w-[450px] sm:max-w-[550px] mb-4 border border-black/30"
+                    />
+                </div>
+
+                <div className="sm:text-lg ml-1">
                     {parse(post.content)}
                 </div>
             </Container>

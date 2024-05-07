@@ -13,22 +13,23 @@ const Login = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState('')
 
-  const login = async(data) => {
-    setError("")
-    setLoading(true)
+  const login = async (data) => {
+    setError("");
+    setLoading(true);
     try {
-        const session = await authService.login(data)
-        if(session){
-            const userData = await authService.getCurrentUser()
-            if(userData) dispatch(authLogin(userData))
-            navigate("/")
+      const session = await authService.login(data);
+      if (session) {
+        const userData = await authService.getCurrentUser();
+        if (userData) {
+          await dispatch(authLogin(userData)); // Await dispatch
+          navigate("/");
         }
-    } 
-    catch (error) {
-        setError(error.message)
+      }
+    } catch (error) {
+      setError(error.message);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   
   return (
     !loading ? (

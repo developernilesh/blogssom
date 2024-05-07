@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import databaseService from "../../appwrite/conf";
+import authService from "../../appwrite/auth";
 import {Input, RTE, Select, Button} from "../index";
 
 const PostForm = ({post}) => {
@@ -16,7 +16,6 @@ const PostForm = ({post}) => {
     })
 
     const navigate = useNavigate();
-    const userData = useSelector(state => state.auth.userData)
 
     const submit = async(data) => {
         if(post){
@@ -32,7 +31,7 @@ const PostForm = ({post}) => {
             })
 
             if(dbPost) {
-                navigate('/all-posts')
+                navigate('/your-posts')
             }
         }
         else{
@@ -43,13 +42,15 @@ const PostForm = ({post}) => {
                 data.featuredimage = fileId  
             }
 
+            const userData = await authService.getCurrentUser()
+
             const dbPost = await databaseService.createPost({
                 ...data,
                 userid: `${userData.$id}`,
             })
 
             if(dbPost) {
-                navigate('/all-posts')
+                navigate('/your-posts')
             }
         }
     }
@@ -60,7 +61,8 @@ const PostForm = ({post}) => {
                 .trim()
                 .toLowerCase()
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
-                .replace(/\s/g, "-");
+                .replace(/\s/g, "-")
+                .slice(0, 34);
 
         return "";
     }, []);

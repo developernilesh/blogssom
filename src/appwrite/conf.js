@@ -64,7 +64,6 @@ export class DatabaseService{
 
     async getPost(slug){
         try {
-            console.log(slug)
             return await this.databases.getDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,

@@ -9,8 +9,6 @@ const AllPosts = () => {
     const [posts,setPosts] = useState([])
     const [loading, setLoading] = useState(true)
 
-    // const userData = useSelector((state) => state.auth.userData);
-
     useEffect(() => {
         const fetchPosts = async () => {
 

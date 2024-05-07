@@ -7,7 +7,4 @@ const store = configureStore({
     }
 })
 
-console.log("Redux store");
-
-
 export default store;

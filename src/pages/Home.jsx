@@ -12,8 +12,6 @@ const Home = () => {
 
     const userData = useSelector(state => state.auth.status)
 
-    console.log(userData);
-
     useEffect(() => {
         databaseService.getAllPosts([])
         .then((posts) => {
