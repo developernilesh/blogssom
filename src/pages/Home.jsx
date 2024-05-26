@@ -5,12 +5,19 @@ import { Button, Container, Loader, PostCard } from "../components";
 import { useSelector } from "react-redux";
 import defaultBg from '../assets/defaultbg.png'
 import { Link } from "react-router-dom";
+import authService from "../appwrite/auth";
 
 const Home = () => {
     const [posts,setPosts] = useState([])
     const [loading, setloading] = useState(true)
+    const [currentUser, setCurrentUser] = useState()
 
-    const userData = useSelector(state => state.auth.status)
+    const userStatus = useSelector(state => state.auth.status)
+
+    const fetchCurrentUser = async() => {
+        const userData = await authService.getCurrentUser()
+        setCurrentUser(userData.$id)
+    }
 
     useEffect(() => {
         databaseService.getAllPosts([])
@@ -19,12 +26,14 @@ const Home = () => {
                 setPosts(posts.documents)
             }
         }).finally(setloading(false))
+
+        fetchCurrentUser()
     },[])
 
     return(
         !loading ?
         (
-            userData ?
+            userStatus ?
             (
                 posts.length === 0 ? 
                 (null) :
@@ -35,7 +44,7 @@ const Home = () => {
                             <div className='flex justify-around flex-wrap pt-6'>
                                 {posts.map((post) => (
                                     <div key={post.$id} className='p-2 w-[270px]'>
-                                        <PostCard {...post} />
+                                        <PostCard {...post} currentUser={currentUser} />
                                     </div>
                                 ))}
                             </div>

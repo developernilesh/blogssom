@@ -15,14 +15,14 @@ export class DatabaseService{
         this.bucket = new Storage(this.client);
     }
 
-    async createPost({title,slug,content,featuredimage,status,userid}){
+    async createPost({title,slug,content,featuredimage,status,userid,Likes}){
         try {
             return await this.databases.createDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug,
                 {
-                    title, content, featuredimage, status, userid,
+                    title, content, featuredimage, status, userid, Likes
                 }
             )
         } 
