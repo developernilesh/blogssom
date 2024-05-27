@@ -15,14 +15,14 @@ export class DatabaseService{
         this.bucket = new Storage(this.client);
     }
 
-    async createPost({title,slug,content,featuredimage,status,userid,Likes}){
+    async createPost({title,slug,content,featuredimage,status,userid}){
         try {
             return await this.databases.createDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug,
                 {
-                    title, content, featuredimage, status, userid, Likes
+                    title, content, featuredimage, status, userid
                 }
             )
         } 
@@ -31,14 +31,14 @@ export class DatabaseService{
         }
     }
 
-    async updatePost(slug,{title,content,featuredimage,status}){
+    async updatePost(slug,{title,content,featuredimage,status,Likes}){
         try {
             return await this.databases.updateDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug,
                 {
-                    title, content, featuredimage, status,
+                    title, content, featuredimage, status, Likes
                 }
             )
         } 

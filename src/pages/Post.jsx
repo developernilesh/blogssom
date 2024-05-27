@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import databaseService from "../appwrite/conf";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
-import { useSelector } from "react-redux";
 import authService from "../appwrite/auth";
 
 const Post = () => {
@@ -62,12 +61,16 @@ const Post = () => {
                     )}
                 </div>
 
-                <div className="w-full flex justify-center">
+                <div className="w-full flex flex-col items-center mb-4">
                     <img
                         src={databaseService.seeFilePreview(post.featuredimage)}
                         alt={post.title}
-                        className="rounded-sm w-full max-w-[450px] sm:max-w-[550px] mb-4 border border-black/30"
+                        className="rounded-sm w-full max-w-[450px] sm:max-w-[550px] border border-black/30"
                     />
+                    <div className="w-full max-w-[450px] sm:max-w-[550px] text-center py-1 text-base md:text-lg font-medium text-slate-800 pr-0.5">
+                        {post.Likes.length} likes 
+                    </div>
+                    <div className="w-full max-w-[450px] sm:max-w-[550px] h-[0.1rem] bg-slate-600"></div>
                 </div>
 
                 <div className="sm:text-lg ml-1">

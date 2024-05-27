@@ -10,15 +10,13 @@ const PostCard = ({$id, title, featuredimage, content, Likes, currentUser}) => {
 
   const likeHandler = async () => {
     let updatedLikes;
+    
+    if (countLikes.includes(currentUser)) {
+      updatedLikes = countLikes.filter(like => like !== currentUser);
 
-    
-      if (countLikes.includes(currentUser)) {
-        updatedLikes = countLikes.filter(like => like !== currentUser);
-  
-      } else {
-        updatedLikes = [...countLikes, currentUser];
-      }
-    
+    } else {
+      updatedLikes = [...countLikes, currentUser];
+    }
 
     setCountLikes(updatedLikes);
     setIsliked(!isLiked)
@@ -27,6 +25,8 @@ const PostCard = ({$id, title, featuredimage, content, Likes, currentUser}) => {
       Likes: updatedLikes
     });
   };
+
+  // console.log(countLikes);
 
   return (
     <div className="bg-white/60 shadow-[0_0px_6px_rgba(0,0,0,0.3)] pb-2 mb-4">
