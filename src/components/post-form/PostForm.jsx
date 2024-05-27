@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import databaseService from "../../appwrite/conf";
 import authService from "../../appwrite/auth";
 import {Input, RTE, Select, Button} from "../index";
+import toast from "react-hot-toast";
 
 const PostForm = ({post}) => {
     const {register, handleSubmit, watch, control, setValue, getValues} = useForm({
@@ -32,6 +33,7 @@ const PostForm = ({post}) => {
 
             if(dbPost) {
                 navigate('/your-posts')
+                toast.success('Updated Sucsessfully')
             }
         }
         else{
@@ -51,6 +53,7 @@ const PostForm = ({post}) => {
 
             if(dbPost) {
                 navigate('/your-posts')
+                toast.success('Post Created Successfully')
             }
         }
     }

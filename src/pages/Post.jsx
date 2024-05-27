@@ -4,24 +4,33 @@ import databaseService from "../appwrite/conf";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import authService from "../appwrite/auth";
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 
 const Post = () => {
     const [post, setPost] = useState(null);
     const [isAuthor, setIsAuthor] = useState(false)
     const { slug } = useParams();
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState()
+    const [countLikes, setCountLikes] = useState();
+    const [isLiked,setIsliked] = useState()
 
     useEffect(() => {
         if (slug) {
             databaseService.getPost(slug).then((post) => {
-                if (post) setPost(post);
+                if (post){
+                    setPost(post);
+                    setCountLikes(post.Likes)
+                    setIsliked(currentUser ? post.Likes.includes(currentUser) : null)
+                } 
                 else navigate("/");
             });
         } else navigate("/");
-    }, [slug, navigate]);
+    }, [slug, navigate,currentUser]);
 
     const fetchAuthorInfo = async() => {
         const userData = await authService.getCurrentUser()
+        setCurrentUser(userData.$id)
 
         if(post && userData){
             post.userid === userData.$id ? setIsAuthor(true) : setIsAuthor(false)
@@ -36,8 +45,25 @@ const Post = () => {
                 navigate("/");
             }
         });
-    };
+    }; 
+
+    const likeHandler = async () => {
+        let updatedLikes;
+        
+        if (countLikes.includes(currentUser)) {
+            updatedLikes = countLikes.filter(like => like !== currentUser);
+        
+        } else {
+            updatedLikes = [...countLikes, currentUser];
+        }
     
+        setCountLikes(updatedLikes);
+        setIsliked(!isLiked)
+    
+        await databaseService.updatePost(post.$id, {
+          Likes: updatedLikes
+        });
+    };
 
     return post ? (
         <div className="py-8">
@@ -67,8 +93,28 @@ const Post = () => {
                         alt={post.title}
                         className="rounded-sm w-full max-w-[450px] sm:max-w-[550px] border border-black/30"
                     />
-                    <div className="w-full max-w-[450px] sm:max-w-[550px] text-center py-1 text-base md:text-lg font-medium text-slate-800 pr-0.5">
-                        {post.Likes.length} likes 
+                    <div className="w-full max-w-[450px] sm:max-w-[550px] flex justify-center py-1 text-base md:text-lg font-medium text-slate-800 pr-0.5">
+                        {(currentUser && countLikes && isLiked!==(null || undefined)) ? 
+                        (<div className="flex items-center gap-2 ">
+                            <button onClick={likeHandler}>
+                            {
+                            isLiked ? 
+                            (<IoIosHeart fontSize="1.75rem" className="text-pink-600 active:animate-ping"/>) 
+                            : (<IoIosHeartEmpty fontSize="1.75rem" className="text-pink-800 active:animate-ping"/>)
+                            }
+                            </button>
+                            <div className="font-bold">&#183;</div>
+                            <div>
+                                {countLikes.length} likes 
+                            </div>
+                        </div>
+                        ) : 
+                        (
+                            <div className="flex gap-1 items-end">
+                                <div className="text-sm md:text-base">Fetching Likes Data</div> 
+                                <div className="text-base sm:text-lg md:text-xl font-bold animate-pulse">. . .</div>
+                            </div>
+                        )}
                     </div>
                     <div className="w-full max-w-[450px] sm:max-w-[550px] h-[0.1rem] bg-slate-600"></div>
                 </div>

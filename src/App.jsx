@@ -5,6 +5,7 @@ import { login,logout } from './store/slices/authSlice'
 import { Header,Footer } from './components'
 import { Outlet } from 'react-router-dom'
 import Loader from './components/Loader/Loader'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -38,6 +39,8 @@ function App() {
           </main>
 
           <Footer />
+
+          <Toaster/>
 
         </div>
       </div>

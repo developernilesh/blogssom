@@ -5,6 +5,8 @@ import authService from "../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Input, logoImg, Button, Container, Loader } from ".";
+import toast from "react-hot-toast";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -12,6 +14,7 @@ const Signup = () => {
   const {register, handleSubmit} = useForm()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState('')
+  const [showPassword,setShowPassword] = useState(false)
 
   const signUp = async(data) => {
     setError("")
@@ -23,6 +26,8 @@ const Signup = () => {
             if(userData) dispatch(login(userData))
             navigate("/")
         }
+
+        toast.success('Account created successfully')
     } 
     catch (error) {
         setError(error.message)
@@ -80,14 +85,22 @@ const Signup = () => {
                         })}
                         />
 
-                        <Input
-                        label="Password: "
-                        type="password"
-                        placeholder="Enter your password"
-                        {...register("password", {
-                            required: true,
-                        })}
-                        />
+                        <div className="w-full relative">
+                          <Input
+                          label="Password: "
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          {...register("password", {
+                              required: true,
+                          })}
+                          />
+                          <span onClick={() => setShowPassword((prev)=>!prev)}
+                          className="absolute right-3 top-[38px] cursor-pointer">
+                              {showPassword ? 
+                              <AiOutlineEyeInvisible fontSize={24} fill="#3e3e3e"/> : 
+                              <AiOutlineEye fontSize={24} fill="#3e3e3e"/> }
+                          </span>
+                        </div>
 
                         <Button
                         type="submit"
