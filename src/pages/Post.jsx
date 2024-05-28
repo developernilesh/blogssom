@@ -43,7 +43,7 @@ const Post = () => {
         databaseService.deletePost(post.$id).then((status) => {
             if (status) {
                 databaseService.deleteFile(post.featuredimage);
-                navigate("/");
+                navigate("/your-posts");
             }
         }).finally(() => toast.success('Post deleted successfully'));
     }; 
