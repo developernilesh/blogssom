@@ -108,7 +108,7 @@ export class DatabaseService{
 
     async deleteFile(fileId){
         try {
-            await this.bucket.createFile(
+            await this.bucket.deleteFile(
                 config.appwriteBucketId,
                 fileId,
             )

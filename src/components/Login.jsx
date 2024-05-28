@@ -64,7 +64,7 @@ const Login = () => {
                 }
 
                 <form onSubmit={handleSubmit(login)} className="mt-8">
-                    <div className="space-y-5">
+                    <div className="">
                         <Input
                         label="Email: "
                         placeholder="Enter your email"
@@ -77,6 +77,7 @@ const Login = () => {
                             }
                         })}
                         />
+                        <div className="w-full text-right text-gray-600"><span className="italic">Test Email </span>: test@mail.com</div>
 
                         <div className="w-full relative">
                           <Input
@@ -94,10 +95,11 @@ const Login = () => {
                               <AiOutlineEye fontSize={24} fill="#3e3e3e"/> }
                           </span>
                         </div>
+                        <div className="w-full text-right text-gray-600"><span className="italic">Test Password </span>: 12345678</div>
 
                         <Button
                         type="submit"
-                        className="w-full"
+                        className="w-full mt-2"
                         >Sign in</Button>
                     </div>
                 </form>

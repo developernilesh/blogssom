@@ -5,6 +5,7 @@ import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import authService from "../appwrite/auth";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+import toast from "react-hot-toast";
 
 const Post = () => {
     const [post, setPost] = useState(null);
@@ -44,7 +45,7 @@ const Post = () => {
                 databaseService.deleteFile(post.featuredimage);
                 navigate("/");
             }
-        });
+        }).finally(() => toast.success('Post deleted successfully'));
     }; 
 
     const likeHandler = async () => {
